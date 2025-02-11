@@ -39,7 +39,7 @@ public class practical1 {
       pratical1 network = new pratical1();  // Creating object of NetworkInfo
 
         // Using getter methods
-        System.out.println("Local IP Address: " + network.getIpAddress());
-        System.out.println("MAC Address: " + network.getMacAddress());
+        System.out.println("Local IP Address of Sameer PC: " + network.getIpAddress());
+        System.out.println("MAC Address of Sameer PC: " + network.getMacAddress());
     }
 }
