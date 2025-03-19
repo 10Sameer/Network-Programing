@@ -1,3 +1,5 @@
+// using getAuthority() method of URL class, write a program to parse the given URL into its components.
+// For example, the URL "http://www.example.com:80/index.html" should be parsed into:
 import java.net.URI;
 import java.net.URISyntaxException;
 

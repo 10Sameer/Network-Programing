@@ -1,3 +1,5 @@
+// That block all the cookie from the .gov domain
+// This is a simple example of how to use a custom cookie policy to block cookies from a specific domain.
 import java.net.*;
 import java.io.*;
 

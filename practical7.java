@@ -1,3 +1,4 @@
+// compare the two URLs and check if the hosts are the same or not
 import java.net.URL;
 
 
