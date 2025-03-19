@@ -6,7 +6,7 @@ public class URLConnectionExample {
 public static void main(String[] args) {
 try {
 
-URL url = new URL("https://www.example.com");
+URL url = new URL ("https://www.example.com");
 // Open a connection to the given url
 URLConnection urlConnection = url.openConnection();
 // Get the input stream from the URL connection which we use to read data from the resources
