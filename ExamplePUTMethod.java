@@ -9,7 +9,7 @@ public class ExamplePUTMethod  {
         conn.setDoOutput(true);
 
         // Send data in the request body
-        String data = "name=JohnDoe&email=john@example.com";
+        String data = "name=Sameer&email=Sameer@example.com";
         try (OutputStream os = conn.getOutputStream()) {
             byte[] input = data.getBytes("utf-8");
             os.write(input, 0, input.length);
