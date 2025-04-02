@@ -4,7 +4,7 @@ import java.net.*;
 public class ChatServer {
     public static void main(String[] args) {
         try {
-            ServerSocket serverSocket = new ServerSocket(6100); // Create server socket on port 5000
+            ServerSocket serverSocket = new ServerSocket(6200); // Create server socket on port 5000
             System.out.println("Server started . Waiting for client...");
             Socket socket = serverSocket.accept(); // Accept client connection
             System.out.println("Client connected.");
