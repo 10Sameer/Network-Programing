@@ -15,4 +15,22 @@ public class UserDatagramServer {
             serverSocket.receive(receivePacket);
 
             // Extract data and print
-   
+            String clientMessage = new String(receivePacket.getData(), 0, receivePacket.getLength());
+            System.out.println("Received from client: " + clientMessage);
+
+            // Reply to client
+            String reply = "Hello from server!";
+            byte[] sendData = reply.getBytes();
+
+            InetAddress clientAddress = receivePacket.getAddress();
+            int clientPort = receivePacket.getPort();
+
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientAddress, clientPort);
+            serverSocket.send(sendPacket);
+
+            serverSocket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
