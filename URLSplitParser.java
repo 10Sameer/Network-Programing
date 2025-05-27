@@ -25,6 +25,16 @@ public class URLSplitParser {
             port = protocol.equals("https") ? "443" : "80"; // Default ports
         }
 
-   
+        System.out.println("URL: " + url);
+        System.out.println("Protocol: " + protocol);
+        System.out.println("Host: " + host);
+        System.out.println("Port: " + port);
+        System.out.println("Path: " + path);
+
+        // Optional: Extract query and fragment
+        String query = "";
+        String fragment = "";
+
+  
     }
 }
