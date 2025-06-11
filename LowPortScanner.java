@@ -30,3 +30,13 @@ public class LowPortScanner {
         }
     }
 
+    // Method to check if a UDP port is open
+    public static boolean isUDPPortOpen(int port) {
+        try (DatagramSocket datagramSocket = new DatagramSocket(port)) {
+            datagramSocket.setReuseAddress(true);
+            return false; // Not open
+        } catch (IOException e) {
+            return true; // Port is in use
+        }
+    }
+}
