@@ -12,4 +12,12 @@ public class LowPortScanner {
             if (isTCPPortOpen(port)) {
                 System.out.println("TCP Port " + port + " is OPEN");
             }
-       
+            if (isUDPPortOpen(port)) {
+                System.out.println("UDP Port " + port + " is OPEN");
+            }
+        }
+
+        System.out.println("\nScan complete.");
+    }
+
+  
