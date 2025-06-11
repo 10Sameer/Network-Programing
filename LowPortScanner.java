@@ -20,4 +20,13 @@ public class LowPortScanner {
         System.out.println("\nScan complete.");
     }
 
-  
+    // Method to check if a TCP port is open
+    public static boolean isTCPPortOpen(int port) {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            serverSocket.setReuseAddress(true);
+            return false; // Not open (we were able to bind, so nothing else is using it)
+        } catch (IOException e) {
+            return true; // Port is in use
+        }
+    }
+
