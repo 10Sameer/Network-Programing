@@ -14,4 +14,8 @@ public class URLComparison {
         }
     }
 
-
+    public static void main(String[] args) {
+        compareURLs("http://www.ibiblio.org", "http://helios.ibiblio.org");
+        compareURLs("http://www.ibiblio.org/", "http://ibiblio.org/");
+    }
+}
