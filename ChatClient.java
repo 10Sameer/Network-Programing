@@ -23,3 +23,19 @@ public class ChatClient {
                     System.out.println("You left the chat.");
                     break;
                 }
+
+                // Wait for server response
+                String serverReply = input.readLine();
+                if (serverReply == null || serverReply.equalsIgnoreCase("bye")) {
+                    System.out.println("Server ended the chat.");
+                    break;
+                }
+                System.out.println("Server: " + serverReply);
+            }
+
+            socket.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
