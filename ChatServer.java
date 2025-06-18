@@ -10,3 +10,9 @@ public class ChatServer {
 
             Socket socket = serverSocket.accept();
             System.out.println(" Sameer connected!");
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+
+       
