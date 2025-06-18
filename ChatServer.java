@@ -15,4 +15,29 @@ public class ChatServer {
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
 
-       
+            while (true) {
+                // Wait for Sameer's message
+                String clientMsg = input.readLine();
+                if (clientMsg == null || clientMsg.equalsIgnoreCase("bye")) {
+                    System.out.println("Sameer has left the chat.");
+                    break;
+                }
+                System.out.println("Sameer: " + clientMsg);
+
+                // Now server replies
+                System.out.print("You: ");
+                String serverMsg = keyboard.readLine();
+                output.println(serverMsg);
+
+                if (serverMsg.equalsIgnoreCase("bye")) {
+                    System.out.println("You ended the chat.");
+                    break;
+                }
+            }
+
+            socket.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
