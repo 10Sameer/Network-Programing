@@ -13,4 +13,13 @@ public class ChatClient {
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
 
-         
+            while (true) {
+                // Sameer sends message
+                System.out.print("Sameer: ");
+                String msg = keyboard.readLine();
+                output.println(msg);
+
+                if (msg.equalsIgnoreCase("bye")) {
+                    System.out.println("You left the chat.");
+                    break;
+                }
