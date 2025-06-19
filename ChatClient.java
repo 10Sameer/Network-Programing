@@ -1,41 +1,39 @@
 import java.io.*;
 import java.net.*;
 
-public class ChatClient {
+public class ChatServer {
     public static void main(String[] args) {
-        String serverAddress = "localhost";
-        int port = 8088;
+        int port = 8080;
 
-        try (Socket socket = new Socket(serverAddress, port)) {
-            System.out.println(" Connected to server as Sameer");
+        try (ServerSocket serverSocket = new ServerSocket(port);
+             Socket clientSocket = serverSocket.accept();
+             BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+             PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
+             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in))) {
 
-            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println(" Server is waiting for Sameer...");
+            System.out.println(" Sameer connected!");
 
             while (true) {
-                // Sameer sends message
-                System.out.print("Sameer: ");
-                String msg = keyboard.readLine();
-                output.println(msg);
-
-                if (msg.equalsIgnoreCase("bye")) {
-                    System.out.println("You left the chat.");
+                String clientMsg = input.readLine();
+                if (clientMsg == null || clientMsg.equalsIgnoreCase("bye")) {
+                    System.out.println("Sameer has left the chat.");
                     break;
                 }
+                System.out.println("Sameer: " + clientMsg);
 
-                // Wait for server response
-                String serverReply = input.readLine();
-                if (serverReply == null || serverReply.equalsIgnoreCase("bye")) {
-                    System.out.println("Server ended the chat.");
+                System.out.print("You: ");
+                String serverMsg = keyboard.readLine();
+                output.println(serverMsg);
+
+                if (serverMsg.equalsIgnoreCase("bye")) {
+                    System.out.println("You ended the chat.");
                     break;
                 }
-                System.out.println("Server: " + serverReply);
             }
 
-            socket.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

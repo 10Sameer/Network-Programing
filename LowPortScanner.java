@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 public class LowPortScanner {
 
     public static void main(String[] args) {
-        System.out.println("Scanning TCP and UDP ports (1-1024) on localhost...\n");
+        System.out.println("Scanning TCP and UDP ports on localhost...\n");
 
         for (int port = 1; port <= 1024; port++) {
             if (isTCPPortOpen(port)) {

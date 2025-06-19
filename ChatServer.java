@@ -3,7 +3,7 @@ import java.net.*;
 
 public class ChatServer {
     public static void main(String[] args) {
-        int port = 8088;
+        int port = 8090;
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println(" Server is waiting for Sameer...");
@@ -25,12 +25,12 @@ public class ChatServer {
                 System.out.println("Sameer: " + clientMsg);
 
                 // Now server replies
-                System.out.print("You: ");
+                System.out.print("Server: ");
                 String serverMsg = keyboard.readLine();
                 output.println(serverMsg);
 
                 if (serverMsg.equalsIgnoreCase("bye")) {
-                    System.out.println("You ended the chat.");
+                    System.out.println("The chat has been ended.");
                     break;
                 }
             }
