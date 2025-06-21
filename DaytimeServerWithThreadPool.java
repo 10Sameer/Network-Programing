@@ -30,4 +30,19 @@ public class DaytimeServerWithThreadPool {
         }
     }
 
-   
+    private static void handleClient(Socket clientSocket) {
+        try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
+            String currentTime = new Date().toString();
+            out.println("Current date and time: " + currentTime);
+            System.out.println("Sent to " + clientSocket.getInetAddress().getHostAddress() + " - " + currentTime);
+        } catch (IOException e) {
+            System.out.println("Error handling client: " + e.getMessage());
+        } finally {
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+                System.err.println("Couldn't close client socket: " + e.getMessage());
+            }
+        }
+    }
+}
