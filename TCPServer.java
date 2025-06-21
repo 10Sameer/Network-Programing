@@ -11,4 +11,17 @@ public class TCPServer {
             Socket clientSocket = serverSocket.accept();
             System.out.println("Client connected: " + clientSocket.getInetAddress().getHostAddress());
 
-       
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            String clientMsg = in.readLine();
+            System.out.println("Client says: " + clientMsg);
+
+            out.println("Hello from Server!");
+
+            clientSocket.close();
+        } catch (IOException e) {
+            System.err.println("Server error: " + e.getMessage());
+        }
+    }
+}
