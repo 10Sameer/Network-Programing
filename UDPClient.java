@@ -16,4 +16,17 @@ public class UDPClient {
             DatagramPacket requestPacket = new DatagramPacket(sendData, sendData.length, serverAddress, SERVER_PORT);
             socket.send(requestPacket);
 
-         
+            // Receive server's response
+            byte[] buffer = new byte[1024];
+            DatagramPacket responsePacket = new DatagramPacket(buffer, buffer.length);
+            socket.receive(responsePacket);
+
+            String response = new String(responsePacket.getData(), 0, responsePacket.getLength());
+            System.out.println("Server Date & Time: " + response);
+
+            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
