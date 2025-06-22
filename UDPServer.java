@@ -22,4 +22,22 @@ public class UDPServer {
                 String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
                 byte[] timeData = currentTime.getBytes();
 
-         
+                // Send response
+                DatagramPacket response = new DatagramPacket(
+                    timeData,
+                    timeData.length,
+                    request.getAddress(),
+                    request.getPort()
+                );
+
+                socket.send(response);
+                System.out.println("Sent time to " + request.getAddress() + ":" + request.getPort());
+            socket.close();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
