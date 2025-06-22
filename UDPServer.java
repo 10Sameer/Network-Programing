@@ -13,4 +13,13 @@ public class UDPServer {
 
             byte[] buffer = new byte[1024];
 
-           
+            while (true) {
+                // Receive request
+                DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+                socket.receive(request);
+
+                // Get current date and time
+                String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                byte[] timeData = currentTime.getBytes();
+
+         
