@@ -1,27 +1,35 @@
-import java.io.*;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 
-public class TCPServer {
+public class UDPEchoServer {
     public static void main(String[] args) {
-        int port = 5001;
+        int port = 9876;
 
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.println("Server started. Waiting for client...");
+        try {
+            DatagramSocket serverSocket = new DatagramSocket(port);
+            System.out.println("UDP Echo Server started on port " + port + "...");
 
-            Socket clientSocket = serverSocket.accept();
-            System.out.println("Client connected: " + clientSocket.getInetAddress().getHostAddress());
+            byte[] receiveBuffer = new byte[1024];
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            while (true) {
+                DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+                serverSocket.receive(receivePacket);
 
-            String clientMsg = in.readLine();
-            System.out.println("Client says: " + clientMsg);
+                String clientMessage = new String(receivePacket.getData(), 0, receivePacket.getLength());
+                System.out.println("Received from client: " + clientMessage);
 
-            out.println("Hello from Server!");
+                // Echo the message back to the client
+                DatagramPacket sendPacket = new DatagramPacket(
+                    receivePacket.getData(),
+                    receivePacket.getLength(),
+                    receivePacket.getAddress(),
+                    receivePacket.getPort()
+                );
+                serverSocket.send(sendPacket);
+            }
 
-            clientSocket.close();
-        } catch (IOException e) {
-            System.err.println("Server error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Server error: " + e.getMessage());
         }
     }
 }

@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class UDPEchoClient {
     public static void main(String[] args) {
-        String serverIP = "localhost"; // Replace with IP like "192.168.1.x" if needed
+        String serverIP = "localhost"; // Or server IP like "192.168.1.x"
         int port = 9876;
 
-        try (DatagramSocket clientSocket = new DatagramSocket();
-             Scanner scanner = new Scanner(System.in)) {
+        try {
+            DatagramSocket clientSocket = new DatagramSocket();
+            Scanner scanner = new Scanner(System.in);
 
             System.out.print("Enter message to send: ");
             String message = scanner.nextLine();
@@ -25,10 +26,13 @@ public class UDPEchoClient {
             clientSocket.receive(receivePacket);
 
             String echoedMessage = new String(receivePacket.getData(), 0, receivePacket.getLength());
-            System.out.println("Received from server: " + echoedMessage);
+            System.out.println("Server echoed: " + echoedMessage);
+
+            clientSocket.close();
+            scanner.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Client error: " + e.getMessage());
         }
     }
 }
