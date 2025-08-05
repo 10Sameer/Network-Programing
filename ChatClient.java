@@ -3,7 +3,7 @@ import java.net.*;
 
 public class ChatServer {
     public static void main(String[] args) {
-        int port = 8080;
+        int port = 9090;
 
         try (ServerSocket serverSocket = new ServerSocket(port);
              Socket clientSocket = serverSocket.accept();
